@@ -6,22 +6,29 @@
   "main": "dist/cytoscape.js-css-variables.cjs.js",
   "module": "dist/cytoscape.js-css-variables.esm.js",
   "browser": "dist/cytoscape.js-css-variables.umd.js",
+  "unpkg": "./dist/cytoscape.js-css-variables.js",
+  "types": "./dist/cytoscape.js-css-variables.d.ts",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "ts-node test/test.ts",
+    "test": "jest",
+    "ts": "ts-node test/test.ts",
     "pretest": "npm run build"
   },
   "files": [
-    "dist"
+    "src",
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
   ],
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^15.1.0",
-    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@babel/preset-typescript": "^7.10.4",
     "@rollup/plugin-typescript": "^6.0.0",
+    "@testing-library/jest-dom": "^5.11.4",
     "@types/cytoscape": "^3.14.7",
     "cytoscape": "^3.16.1",
+    "jest": "^26.4.2",
     "rollup": "1.29.0",
+    "rollup-plugin-typescript2": "^0.27.3",
     "ts-node": "^7.0.1",
     "tslib": "^1.9.3",
     "typescript": "^3.2.2"
