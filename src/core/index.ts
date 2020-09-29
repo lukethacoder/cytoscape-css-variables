@@ -1,135 +1,169 @@
-import { Core, EventObject } from 'cytoscape'
-
-let cy
-
-let css_vars_obj: { [key: string]: string }
-let css_variables = Object.keys(css_vars_obj)
-
-type Activator = (evt: EventObject) => boolean
+import { Core } from 'cytoscape'
 
 interface Options {
-  threshold?: number
-  activators?: Activator[]
+  initialVars?: { [key: string]: string }
+  domEl?: HTMLElement
 }
 
-const defaultThreshold = 5
+declare global {
+  interface Element {
+    visible: () => boolean
+  }
+}
 
-const defaultActivators: Activator[] = [
-  (evt) => {
-    if (evt.originalEvent instanceof MouseEvent) {
-      return evt.originalEvent.button === 0
-    } else if (evt.originalEvent instanceof TouchEvent) {
-      return evt.originalEvent.touches.length === 1
+export default class CssVarsPlugin {
+  readonly _cy: Core
+  readonly _options: Options
+
+  _domEl: HTMLElement
+  _domElComputedStyle: CSSStyleDeclaration
+
+  css_vars_obj: { [key: string]: string } = {}
+  css_vars_keys: string[] = []
+
+  constructor(cy: Core, options: Options = {}) {
+    this._cy = cy
+    this._options = options
+
+    if (this._options.domEl) {
+      this._domEl = this._options.domEl
+      this.refreshDomComputedStyle()
     }
-    return false
-  },
-]
 
-/**
- * @description Refresh the CSS variables and assign values to the css_vars_obj.
- * NOTE: must be manually invoked, we can't watch for CSS var change events (yet)
- */
-function refreshCssVars() {
-  const bodyCss = getComputedStyle(document.body)
-
-  css_variables.forEach(
-    (css_var) => (css_vars_obj[css_var] = bodyCss.getPropertyValue(css_var))
-  )
-
-  cy.startBatch()
-  cy.elements('*').data({})
-  cy.endBatch()
-}
-
-export default function extension(this: Core, options: Options = {}): Core {
-  let cy = this
-  console.log('cy ', cy)
-
-  const threshold = options.threshold || defaultThreshold
-  const activators = options.activators || defaultActivators
-  // const userPanningEnabled = this.userPanningEnabled()
-  // const boxSelectionEnabled = this.boxSelectionEnabled()
-  // let hasPanStarted = false
-  // let startEvent: null | EventObject
-
-  // function assignCssVarsToCanvas() {
-  //   let _nodes = cy.nodes()
-  //   console.debug('_nodes ', _nodes)
-  //   _nodes.forEach((node) => {
-  //     const nodesToCheck = []
-  //     const style_obj = node.style()
-  //     console.log(style_obj)
-  //     console.log('background-color', style_obj['background-color'])
-  //     Object.values(style_obj).forEach((style_val, key) => {
-  //       if (style_val.includes('var(')) {
-  //         nodesToCheck.push(key)
-  //       }
-  //     })
-  //     console.log('nodesToCheck ', nodesToCheck)
-  //   })
-  // }
-
-  this.getVar = (variable) => css_vars_obj[variable]
-
-  this.setVar = (variable, value, elRef) => {
-    css_vars_obj[variable] = value
-    elRef.style.setProperty(variable, value)
+    if (this._options.initialVars) {
+      this.addVars(this._options.initialVars)
+    }
   }
 
-  this.refresh = refreshCssVars()
+  /**
+   * @description Refresh the computed style of the current Dom Element
+   */
+  private refreshDomComputedStyle() {
+    if (this._domEl) {
+      this._domElComputedStyle = getComputedStyle(this._domEl)
+    }
+  }
 
-  console.debug('cssVars ', this)
-  console.debug('options ', options)
+  /**
+   * @description Refresh the CSS var keys
+   */
+  private refreshCssVarKeys() {
+    this.css_vars_keys = Object.keys(this.css_vars_obj)
+  }
 
-  this.one('render', (e: any) => {
-    console.debug('render ', e)
-    // assignCssVarsToCanvas()
-  })
+  /**
+   * @description Set CSS variable to the current DOM element
+   *
+   * @param {string} name
+   * @param {string | number} value
+   */
+  private setDomVar(name, value) {
+    if (this._domEl) {
+      this._domEl.style.setProperty(name, value)
+      this.refreshDomComputedStyle()
+    }
+  }
 
-  this.on('style', (e) => {
-    console.warn('styling this element here ', e)
-  })
+  /**
+   * @description Get CSS variable value by name
+   * @param name
+   */
+  getVar(name) {
+    if (this.css_vars_obj[name]) {
+      return this.css_vars_obj[name]
+    } else {
+      return null
+    }
+  }
 
-  // this.on('vmousedown', (evt: EventObject) => {
-  //   if (activators.some((activator) => activator(evt))) {
-  //     startEvent = evt
-  //   }
-  // })
-  // this.on('vmouseup', (evt: EventObject) => {
-  //   if (hasPanStarted) {
-  //     this.emit('awpanend', [evt])
-  //     this.userPanningEnabled(userPanningEnabled)
-  //     this.boxSelectionEnabled(boxSelectionEnabled)
-  //   }
-  //   startEvent = null
-  //   hasPanStarted = false
-  // })
-  // this.on('vmousemove', (evt: EventObject) => {
-  //   if (!startEvent) {
-  //     return
-  //   }
-  //   const startPosition = startEvent.position
-  //   const deltaX = evt.position.x - startPosition.x
-  //   const deltaY = evt.position.y - startPosition.y
-  //   if (!hasPanStarted) {
-  //     if (Math.sqrt(deltaX ** 2 + deltaY ** 2) < threshold) {
-  //       return
-  //     }
-  //     this.emit('awpanstart', [startEvent])
-  //     hasPanStarted = true
-  //     // Disable user panning and box selection only on non touch device
-  //     if (startEvent.originalEvent instanceof MouseEvent) {
-  //       this.userPanningEnabled(false)
-  //       this.boxSelectionEnabled(false)
-  //     }
-  //   }
-  //   const zoom = this.zoom()
-  //   this.panBy({
-  //     x: deltaX * zoom,
-  //     y: deltaY * zoom,
-  //   })
-  //   this.emit('awpanmove', [evt])
-  // })
+  /**
+   * @description Get an object of current CSS Vars
+   */
+  getVars() {
+    return this.css_vars_obj
+  }
 
-  return this
+  /**
+   * @description Set a CSS Variable by name and value
+   *
+   * @param {string} name - Name of CSS Variable (e.g. '--my-var')
+   * @param {string | number} value - Value to set as the variable value
+   */
+  setVar(name, value) {
+    let alreadyExists = this.css_vars_obj[name]
+
+    this.css_vars_obj[name] = value
+
+    this.setDomVar(name, value)
+
+    if (!alreadyExists) {
+      this.refreshCssVarKeys()
+    }
+  }
+
+  /**
+   * @description Remove a single CSS variable by variable name
+   * @param variable - Name of the Variable to remove
+   */
+  removeVar(variable) {
+    if (this.css_vars_obj[variable]) {
+      delete this.css_vars_obj[variable]
+    }
+  }
+
+  /**
+   * @description Bulk add variables by an object of CSS Variables
+   * @param {[key: string]: string} varsObj
+   */
+  addVars(varsObj: { [key: string]: string }) {
+    Object.keys(varsObj).forEach((varsKey) => {
+      this.css_vars_obj[varsKey] = varsObj[varsKey]
+      this.setDomVar(varsKey, varsObj[varsKey])
+    })
+  }
+
+  /**
+   * @description Set the current DOM element to get/set CSS vars to
+   * @param domEl
+   */
+  setDomEl(domEl) {
+    this._domEl = domEl
+  }
+
+  /**
+   * @description Automatically add variables from a DOM Element
+   */
+  addVarsFromDomEl() {
+    if (this._domEl) {
+      // Loop over each defined css variable and get its value
+      this.css_vars_keys.forEach(
+        (css_var) =>
+          (this.css_vars_obj[
+            css_var
+          ] = this._domElComputedStyle.getPropertyValue(css_var))
+      )
+    }
+  }
+
+  /**
+   * @description Reset the css vars
+   */
+  resetVars() {
+    this.css_vars_obj = {}
+    this.css_vars_keys = []
+  }
+
+  /**
+   * @description Refresh the CSS variables and assign values to the css_vars_obj.
+   * NOTE: must be manually invoked, we can't watch for CSS var change events (yet)
+   */
+  update() {
+    this._cy.startBatch()
+    this._cy.elements('*').data({})
+    this._cy.endBatch()
+  }
+}
+
+export function extension(this: Core, options: Options = {}) {
+  return new CssVarsPlugin(this, options)
 }

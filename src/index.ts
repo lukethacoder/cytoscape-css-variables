@@ -1,17 +1,17 @@
-import extension from './core'
+import { extension } from './core'
+export { extension } from './core'
+export * from './core'
+export { default as CssVarsPlugin } from './core'
+export * from './core'
 
-export default function register(cy?: any): void {
-  if (!cy) {
-    return
-  }
-  // Initialize extension
-
-  // Register extension
-  const extensionName = 'cssVars'
-  cy('core', extensionName, extension)
-  // cy('collection', extensionName, extension);
-  // cy('layout', extensionName, extension);
-  // cy('renderer', extensionName, extension);
+export default function register(
+  cytoscape: (
+    type: 'core' | 'collection' | 'layout',
+    name: string,
+    extension: any
+  ) => void
+) {
+  cytoscape('core', 'cssVars', extension)
 }
 
 // Automatically register the extension for browser
@@ -25,18 +25,17 @@ if (typeof window.cytoscape !== 'undefined') {
 }
 
 // Extend cytoscape.Core
-import 'cytoscape'
-
-declare module 'cytoscape' {
-  interface Activator {
-    (evt: cytoscape.EventObject): boolean
-  }
-
-  interface Options {
-    activators?: Activator[]
-  }
+export declare namespace cytoscape {
+  type Ext2 = (
+    cytoscape: (
+      type: 'core' | 'collection' | 'layout',
+      name: string,
+      extension: any
+    ) => void
+  ) => void
+  function use(module: Ext2): void
 
   interface Core {
-    cssVars(options?: Options): void
+    cssVars: any
   }
 }
