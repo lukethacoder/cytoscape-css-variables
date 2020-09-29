@@ -15,8 +15,8 @@ export default class CssVarsPlugin {
   readonly _cy: Core
   readonly _options: Options
 
-  _domEl: HTMLElement
-  _domElComputedStyle: CSSStyleDeclaration
+  _domEl: HTMLElement | null = null
+  _domElComputedStyle: CSSStyleDeclaration | null = null
 
   css_vars_obj: { [key: string]: string } = {}
   css_vars_keys: string[] = []
@@ -55,9 +55,9 @@ export default class CssVarsPlugin {
    * @description Set CSS variable to the current DOM element
    *
    * @param {string} name
-   * @param {string | number} value
+   * @param {string} value
    */
-  private setDomVar(name, value) {
+  private setDomVar(name: string, value: string) {
     if (this._domEl) {
       this._domEl.style.setProperty(name, value)
       this.refreshDomComputedStyle()
@@ -68,7 +68,7 @@ export default class CssVarsPlugin {
    * @description Get CSS variable value by name
    * @param name
    */
-  getVar(name) {
+  getVar(name: string) {
     if (this.css_vars_obj[name]) {
       return this.css_vars_obj[name]
     } else {
@@ -87,9 +87,9 @@ export default class CssVarsPlugin {
    * @description Set a CSS Variable by name and value
    *
    * @param {string} name - Name of CSS Variable (e.g. '--my-var')
-   * @param {string | number} value - Value to set as the variable value
+   * @param {string} value - Value to set as the variable value
    */
-  setVar(name, value) {
+  setVar(name: string, value: string) {
     let alreadyExists = this.css_vars_obj[name]
 
     this.css_vars_obj[name] = value
@@ -105,7 +105,7 @@ export default class CssVarsPlugin {
    * @description Remove a single CSS variable by variable name
    * @param variable - Name of the Variable to remove
    */
-  removeVar(variable) {
+  removeVar(variable: string) {
     if (this.css_vars_obj[variable]) {
       delete this.css_vars_obj[variable]
     }
@@ -126,7 +126,7 @@ export default class CssVarsPlugin {
    * @description Set the current DOM element to get/set CSS vars to
    * @param domEl
    */
-  setDomEl(domEl) {
+  setDomEl(domEl: HTMLElement) {
     this._domEl = domEl
   }
 
@@ -138,9 +138,9 @@ export default class CssVarsPlugin {
       // Loop over each defined css variable and get its value
       this.css_vars_keys.forEach(
         (css_var) =>
-          (this.css_vars_obj[
-            css_var
-          ] = this._domElComputedStyle.getPropertyValue(css_var))
+          (this.css_vars_obj[css_var] = this._domElComputedStyle
+            ? this._domElComputedStyle.getPropertyValue(css_var)
+            : this.css_vars_obj[css_var])
       )
     }
   }
