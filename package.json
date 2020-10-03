@@ -12,6 +12,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "ts": "ts-node test/test.ts",
+    "test": "echo \"No test specified\"",
     "pretest": "npm run build"
   },
   "files": [
