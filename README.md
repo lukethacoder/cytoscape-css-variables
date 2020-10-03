@@ -117,3 +117,11 @@ css_vars.resetVars()
 css_vars.setDomEl()
 
 ```
+
+## 📢 Publishing
+
+> Make sure you have [np](https://github.com/sindresorhus/np) installed
+
+1. Commit changes to Github
+2. Run `yarn publish`
+3. Profit 💰
