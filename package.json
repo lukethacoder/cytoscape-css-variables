@@ -1,6 +1,6 @@
 {
   "name": "cytoscape-css-variables",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": "https://github.com/lukethacoder/cytoscape-css-variables",
   "author": "Luke Secomb <dev@lukesecomb.digital>",
   "main": "dist/cytoscape-css-variables.cjs.js",
