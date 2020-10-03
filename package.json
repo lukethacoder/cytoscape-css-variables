@@ -1,6 +1,6 @@
 {
   "name": "cytoscape-css-variables",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": "https://github.com/lukethacoder/cytoscape-css-variables",
   "author": "Luke Secomb <dev@lukesecomb.digital>",
   "main": "dist/cytoscape-css-variables.cjs.js",
@@ -14,7 +14,7 @@
     "ts": "ts-node test/test.ts",
     "test": "echo \"No test specified\"",
     "pretest": "npm run build",
-    "publish": "np"
+    "np-publish": "np"
   },
   "files": [
     "src",
