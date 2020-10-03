@@ -12,8 +12,8 @@
 ## 📦 Install
 
 Download the library:
- * via npm: `npm install cytoscape-css-vars`,
- * via unpkg: `https://unpkg.com/cytoscape-css-vars/dist/index.js`
+ * via npm: `npm install cytoscape-css-variables`,
+ * via unpkg: `https://unpkg.com/cytoscape-css-variables/dist/cytoscape-css-variables.js`
 
 Import the library as appropriate for your project:
 
@@ -21,7 +21,7 @@ ES import:
 
 ```js
 import cytoscape from 'cytoscape';
-import cssVars from 'cytoscape-css-vars';
+import cssVars from 'cytoscape-css-variables';
 
 cytoscape.use( cssVars );
 ```
@@ -30,7 +30,7 @@ CommonJS require:
 
 ```js
 let cytoscape = require('cytoscape');
-let cssVars = require('cytoscape-css-vars');
+let cssVars = require('cytoscape-css-variables');
 
 cytoscape.use( cssVars ); // register extension
 ```
@@ -38,7 +38,7 @@ cytoscape.use( cssVars ); // register extension
 AMD:
 
 ```js
-require(['cytoscape', 'cytoscape-css-vars'], function( cytoscape, cssVars ){
+require(['cytoscape', 'cytoscape-css-variables'], function( cytoscape, cssVars ){
   cssVars( cytoscape ); // register extension
 });
 ```
