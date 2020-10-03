@@ -1,0 +1,372 @@
+<!DOCTYPE >
+<html>
+  <head>
+    <title>cytoscape.js-css-variables demo</title>
+
+    <meta property="og:title" content="cytoscape.js-css-variables demo" />
+    <meta property="og:type" content="website" />
+    
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1"
+    />
+
+    <!-- Color Picker is not a dependency, just here for the demo -->
+    <script type="module" src="https://unpkg.com/vanilla-colorful/rgb-string-color-picker?module"></script>
+
+    <!-- Import base cytoscape js package -->
+    <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+    
+    <!-- Import CSS Vars package -->
+    <script src="./dist/cytoscape.js-css-variables.js"></script>
+    
+    <style>
+      :root {
+        --theme-primary: rgb(245, 204, 0);
+        --theme-secondary: rgb(0, 8, 20);
+        --theme-tertiary: rgb(234,84,85);
+        --cy-node-size: 30;
+      }
+      
+      html {
+        font-size: 10px;
+      }
+
+      body {
+        display: flex;
+        font-size: 1.4rem;
+        margin: 0;
+        padding: 0;
+        background-color: var(--theme-secondary);
+        font-family: 'Helvetica', sans-serif;
+      }
+
+      #header {
+        color: #aabbcc;
+        flex: 0 0 300px;
+        padding: 2em;
+        filter: drop-shadow(2px 0 4px rgba(0, 0, 0, 0.12));
+        background: rgba(25,25,25,0.5);
+        position: relative;
+        display:flex;
+        flex-direction: column;
+      }
+      #header::after {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+
+        background: var(--theme-secondary);
+      }
+
+      #header > a {
+        font-size: 1.24rem;
+        color: var(--theme-primary);
+        margin: 0 0 16px;
+        text-decoration: none;
+      }
+
+      #cy {
+        overflow: hidden;
+        flex: 1 1 auto;
+      }
+
+      rgb-string-color-picker {
+        width: 100%;
+      }
+      rgb-string-color-picker::part(saturation) {
+        border-radius: 0;
+      }
+      rgb-string-color-picker::part(hue) {
+        border-radius: 0;
+      }
+
+      .radio--opts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        gap: 4px;
+        margin: 4px 0;
+      }
+      
+      .radio--opts li {
+        position: relative;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .radio--opts li input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        cursor: pointer;
+        margin: 0;
+      }
+      .radio--opts li label {
+        color: var(--theme-primary);
+        transition: all 0.2s cubic-bezier(0, 0, 0.175, 1);
+        font-family: sans-serif;
+        margin: 0;
+        width: 100%;
+        background-color: #ffffff;
+        padding: 6px 12px;
+        text-align: center;
+      }
+      
+      .radio--opts li input:hover ~ label,
+      .radio--opts li input:checked ~ label {
+        color: #ffffff;
+        background-color: var(--theme-primary);
+      }
+
+      #size--slider {
+        background-color: var(--theme-primary);
+        appearance: none;
+        width: 100%;
+        height: 0.5rem;
+        outline: none;
+        border-radius: 0.25rem;
+        margin: 24px 0;
+      }
+
+      #size--slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: var(--theme-primary);
+        border: 2px solid white;
+        border-radius: 10rem;
+        cursor: pointer;
+      }
+
+      .external--links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        flex: 1 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      .external--links li {
+        margin: 8px 0 0;
+        padding: 0;
+        color: var(--theme-primary);
+      }
+      .external--links li a {
+        margin: 0;
+        padding: 0;
+        color: inherit;
+        text-decoration: none;
+      }
+      .external--links li a:hover {
+        opacity: 0.85;
+        text-decoration: underline;
+      }
+    </style>
+
+  </head>
+  <body>
+    <header id="header">
+      <a href="https://github.com/lukethacoder/cytoscape.js-css-variables">
+        <h1>cytoscape.js-css-vars</h1>
+      </a>
+        
+      <rgb-string-color-picker color="rgba(255, 255, 255, 1)"></rgb-string-color-picker>
+      
+      <ul class="radio--opts">
+        <li>
+          <input type="radio" id="primary" name="css-var-type" value="primary"
+                 checked>
+          <label for="primary">primary</label>
+        </li>
+        
+        <li>
+          <input type="radio" id="secondary" name="css-var-type" value="secondary">
+          <label for="secondary">secondary</label>
+        </li>
+        
+        <li>
+          <input type="radio" id="tertiary" name="css-var-type" value="tertiary">
+          <label for="tertiary">tertiary</label>
+        </li>
+      </ul>
+
+      <input id="size--slider" type="range" min="10" max="150" value="30">
+
+      <p style="color: var(--theme-tertiary);">
+        Use the above color picker and theme selector to change the css variables. Or use the range slider to adjust the size of the nodes.
+      </p>
+      
+      <ul class="external--links">
+        <li>
+          <a href="https://github.com/lukethacoder/cytoscape.js-css-variables">
+            Github
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/lukethacoder/cytoscape.js-css-variables">
+            npm
+          </a>
+        </li>
+      </ul>
+    </header>
+
+    <div id="cy"></div>
+    <script>
+      
+      let css_vars
+      let currentTheme = '--theme-primary'
+
+      const picker = document.querySelector('rgb-string-color-picker')
+      function initColorPicker() {
+        // set initial color
+        if (css_vars) {
+          picker.color = css_vars.getVar(currentTheme)
+        } else {
+          picker.color = 'red'
+        }
+
+        // on even listener change, change the css vars
+        // the cssVars extension then needs to know to re-calc the css var values here
+        picker.addEventListener('color-changed', (event) => {
+          const newColor = event.detail.value
+          document.body.style.setProperty(currentTheme, newColor)
+
+          if (css_vars) {
+            css_vars.setVar(currentTheme, newColor)
+            css_vars.update()
+          }
+        })
+      }
+
+      // not core functionality, just here for the demo
+      function initThemeSelector() {
+        const radioWrapper = document.querySelector(`.radio--opts`)
+
+        if (radioWrapper) {
+          const themeInputs = radioWrapper.querySelectorAll('input')
+
+          themeInputs.forEach((themeInput) => {
+            themeInput.addEventListener('input', (e) => {
+              currentTheme = `--theme-${e.target.value}`
+
+              if (css_vars) {
+                picker.color = css_vars.getVar(currentTheme)
+              }
+            })
+          })
+        }
+      }
+
+      function initSizeSlider() {
+        const sizeSlider = document.querySelector('#size--slider');
+
+        if (sizeSlider) {
+          sizeSlider.addEventListener('change', (e) => {
+            console.log('e ', e)
+            console.log('e.target.value ', e.target.value)
+            if (css_vars) {
+              css_vars.setVar('--cy-node-size', e.target.value)
+              css_vars.update()
+            }
+          })
+        }
+      }
+
+      // Can't call css_vars before it is initiated, so abstracting the function here
+      const getVar = (variable) => (css_vars ? css_vars.getVar(variable) : null)
+
+      function initCytoscape() {
+        
+        var cy = (window.cy = cytoscape({
+          container: document.getElementById('cy'),
+          style: [
+            {
+              selector: 'node',
+              style: {
+                'background-color': () => getVar('--theme-primary'),
+                width: () => getVar('--cy-node-size'),
+                height: () => getVar('--cy-node-size'),
+              },
+            },
+            {
+              selector: 'edge',
+              style: {
+                'curve-style': 'bezier',
+                'line-color': () => getVar('--theme-tertiary'),
+              },
+            },
+          ],
+          elements: {
+            nodes: [
+              { data: { id: 'j', name: 'Jerry' } },
+              { data: { id: 'e', name: 'Elaine' } },
+              { data: { id: 'k', name: 'Kramer' } },
+              { data: { id: 'g', name: 'George' } },
+            ],
+            edges: [
+              { data: { source: 'j', target: 'e' } },
+              { data: { source: 'j', target: 'k' } },
+              { data: { source: 'j', target: 'g' } },
+              { data: { source: 'e', target: 'j' } },
+              { data: { source: 'e', target: 'k' } },
+              { data: { source: 'k', target: 'j' } },
+              { data: { source: 'k', target: 'e' } },
+              { data: { source: 'k', target: 'g' } },
+              { data: { source: 'g', target: 'j' } },
+            ],
+          },
+        }));
+        // demo your core ext
+        /*
+        cy.anywherePanning(
+          function() {
+            return panningModeElement.checked;
+          },
+          function(event) {
+            if (event instanceof MouseEvent) {
+              return event.button === 0;
+            } else if (event instanceof TouchEvent) {
+              return event.touches.length === 1;
+            }
+            return false;
+          },
+        );
+
+        */
+
+        console.log('cy ', cy)
+
+        // Init CSS Vars
+        css_vars = cy.cssVars({
+          initialVars: {
+            '--theme-primary': 'rgb(245, 204, 0)',
+            '--theme-secondary': 'rgb(0, 8, 20)',
+            '--theme-tertiary': 'rgb(234,84,85)',
+            '--cy-node-size': 30,
+          },
+          domEl: document.body,
+        })
+        css_vars.update()
+
+        initColorPicker()
+        initThemeSelector()
+        initSizeSlider()
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        initCytoscape()
+      });
+    </script>
+  </body>
+</html>

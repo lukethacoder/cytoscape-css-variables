@@ -21,7 +21,7 @@ export default [
       {
         file: pkg.unpkg,
         format: 'umd',
-        name: 'cytoscapeAnywherePanning',
+        name: 'cssVars',
         global: {
           cytoscape: 'Cytoscape',
         },

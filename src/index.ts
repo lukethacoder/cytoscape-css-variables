@@ -11,6 +11,10 @@ export default function register(
     extension: any
   ) => void
 ) {
+  if (!cytoscape) {
+    console.warn('Unable to register cssVars extension')
+    return
+  }
   cytoscape('core', 'cssVars', extension)
 }
 
