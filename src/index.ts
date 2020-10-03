@@ -1,8 +1,4 @@
 import { extension } from './core'
-export { extension } from './core'
-export * from './core'
-export { default as CssVarsPlugin } from './core'
-export * from './core'
 
 export default function register(
   cytoscape: (
