@@ -1,13 +1,17 @@
 <h1 align="center"> cytoscape-css-variables </h1>
 <br>
 <p align="center">
-  <a href="https://cytoscape.js-css-variables.netlify.app">
+  <a href="https://cytoscape-css-variables.netlify.app/">
     <img alt="cytoscape.js-css-variables" title="cytoscape.js-css-variables" src="./docs/logo.png" width="450">
   </a>
 </p>
 <p align="center">
   Add CSS Variable functionality to Cytoscape graphs
 </p>
+
+## 🎨 Example
+
+[![Example Link](./docs/example.jpg)](https://cytoscape-css-variables.netlify.app/)
 
 ## 📦 Install
 
