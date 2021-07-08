@@ -222,10 +222,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.1.tgz#a6ca6a9a0ff366af433f42f5f0e124794ff6b8f1"
   integrity sha512-FTgBI767POY/lKNDNbIzgAX6miIDBs6NTCbdlDb8TrWovHsSvaVIZDlTqym29C6UqhzwcJx4CYr+AlrMywA0cA==
 
-"@types/cytoscape@3.14.15":
-  version "3.14.15"
-  resolved "https://registry.yarnpkg.com/@types/cytoscape/-/cytoscape-3.14.15.tgz#ce3fc1b494f44d6bccb93a099eb005553fc2a14e"
-  integrity sha512-gl4fmjtiV027bgKyAkPPksa2XVCWfwZ3TOaEejeQQ6cmtdrKqrr13m8zpOYkcIYtRqzA4AT8iUzn7P4/p4sUkA==
+"@types/cytoscape@3.14.16":
+  version "3.14.16"
+  resolved "https://registry.yarnpkg.com/@types/cytoscape/-/cytoscape-3.14.16.tgz#0f1dd97c0711bf4a9f892317e4559adc351aef4e"
+  integrity sha512-ecL5y4kQ7nyE4d+P8Yj/qTH1gZTWqkJ7zqkxjCcQUBrjLwt1CHpm3c3kKf2sava7g6VgOX1Sg2EX9KXf7NNrYw==
 
 "@types/estree@0.0.39":
   version "0.0.39"
