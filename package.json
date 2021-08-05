@@ -26,7 +26,7 @@
     "@rollup/plugin-typescript": "8.2.5",
     "@types/cytoscape": "3.14.17",
     "cytoscape": "3.19.0",
-    "rollup": "2.55.1",
+    "rollup": "2.56.0",
     "rollup-plugin-typescript2": "0.30.0",
     "ts-node": "10.1.0",
     "tslib": "2.3.0",
