@@ -620,10 +620,10 @@ rollup-plugin-typescript2@0.31.2:
     resolve "^1.20.0"
     tslib "^2.3.1"
 
-rollup@2.69.1:
-  version "2.69.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.69.1.tgz#d37f8bf9c9d60018df58c5c9ec36705a7b90dc6e"
-  integrity sha512-xaQKTomUVZBopk38EIshM/kOoPFkKWisgBV7Emy80coP9MOSLUDrba1jKZhqH0iS5DoGcRbbcuyl/BzblV8w5w==
+rollup@2.69.2:
+  version "2.69.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.69.2.tgz#5e0f3b6d07b2a293bc4f4727315dcddb46a96b85"
+  integrity sha512-KghktpWg3Wd+nYCsx3Griidm2/CKIJYG2yyaaKspo0TXSoGdW+0duwzKl4wWIu62oN3mFg3zCDbwVRPwuNPPlA==
   optionalDependencies:
     fsevents "~2.3.2"
 
@@ -654,10 +654,10 @@ to-fast-properties@^2.0.0:
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
   integrity sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=
 
-ts-node@10.6.0:
-  version "10.6.0"
-  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-10.6.0.tgz#c3f4195d5173ce3affdc8f2fd2e9a7ac8de5376a"
-  integrity sha512-CJen6+dfOXolxudBQXnVjRVvYTmTWbyz7cn+xq2XTsvnaXbHqr4gXSCNbS2Jj8yTZMuGwUoBESLaOkLascVVvg==
+ts-node@10.7.0:
+  version "10.7.0"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-10.7.0.tgz#35d503d0fab3e2baa672a0e94f4b40653c2463f5"
+  integrity sha512-TbIGS4xgJoX2i3do417KSaep1uRAW/Lu+WAL2doDHC0D6ummjirVOXU5/7aiZotbQ5p1Zp9tP7U6cYhA0O7M8A==
   dependencies:
     "@cspotcode/source-map-support" "0.7.0"
     "@tsconfig/node10" "^1.0.7"
