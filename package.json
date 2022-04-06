@@ -25,7 +25,7 @@
     "@babel/preset-typescript": "7.16.7",
     "@rollup/plugin-typescript": "8.3.1",
     "@types/cytoscape": "3.19.4",
-    "cytoscape": "3.21.0",
+    "cytoscape": "3.21.1",
     "rollup": "2.70.1",
     "rollup-plugin-typescript2": "0.31.2",
     "ts-node": "10.7.0",
