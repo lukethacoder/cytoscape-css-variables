@@ -23,7 +23,7 @@
   ],
   "devDependencies": {
     "@babel/preset-typescript": "7.18.6",
-    "@rollup/plugin-typescript": "9.0.2",
+    "@rollup/plugin-typescript": "10.0.0",
     "@types/cytoscape": "3.19.9",
     "cytoscape": "3.23.0",
     "rollup": "3.4.0",
