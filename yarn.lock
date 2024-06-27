@@ -493,10 +493,10 @@ create-require@^1.1.0:
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
 
-cytoscape@3.29.2:
-  version "3.29.2"
-  resolved "https://registry.yarnpkg.com/cytoscape/-/cytoscape-3.29.2.tgz#c99f42513c80a75e2e94858add32896c860202ac"
-  integrity sha512-2G1ycU28Nh7OHT9rkXRLpCDP30MKH1dXJORZuBhtEhEW7pKwgPi77ImqlCWinouyE1PNepIOGZBOrE84DG7LyQ==
+cytoscape@3.30.0:
+  version "3.30.0"
+  resolved "https://registry.yarnpkg.com/cytoscape/-/cytoscape-3.30.0.tgz#5b0c13f7bb305481e2c70414d4c5f149d92eda82"
+  integrity sha512-l590mjTHT6/Cbxp13dGPC2Y7VXdgc+rUeF8AnF/JPzhjNevbDJfObnJgaSjlldOgBQZbue+X6IUZ7r5GAgvauQ==
 
 debug@^4.3.1:
   version "4.3.5"
