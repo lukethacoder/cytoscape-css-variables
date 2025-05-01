@@ -22,10 +22,10 @@
     "dist/**/*.d.ts"
   ],
   "devDependencies": {
-    "@babel/preset-typescript": "7.27.0",
+    "@babel/preset-typescript": "7.27.1",
     "@rollup/plugin-typescript": "12.1.2",
     "@types/cytoscape": "3.21.9",
-    "cytoscape": "3.31.3",
+    "cytoscape": "3.31.4",
     "rollup": "4.40.1",
     "rollup-plugin-typescript2": "0.36.0",
     "ts-node": "10.9.2",
