@@ -25,12 +25,12 @@
     "@babel/preset-typescript": "7.27.1",
     "@rollup/plugin-typescript": "12.1.4",
     "@types/cytoscape": "3.21.9",
-    "cytoscape": "3.32.1",
-    "rollup": "4.46.1",
+    "cytoscape": "3.33.0",
+    "rollup": "4.46.2",
     "rollup-plugin-typescript2": "0.36.0",
     "ts-node": "10.9.2",
     "tslib": "2.8.1",
-    "typescript": "5.8.3"
+    "typescript": "5.9.2"
   },
   "peerDependencies": {
     "cytoscape": "^3.2.0"
