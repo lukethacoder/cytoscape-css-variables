@@ -478,10 +478,10 @@ cytoscape@*:
   resolved "https://registry.yarnpkg.com/cytoscape/-/cytoscape-3.33.1.tgz#449e05d104b760af2912ab76482d24c01cdd4c97"
   integrity sha512-iJc4TwyANnOGR1OmWhsS9ayRS3s+XQ185FmuHObThD+5AeJCakAAbWv8KimMTt08xCCLNgneQwFp+JRJOr9qGQ==
 
-cytoscape@3.33.4:
-  version "3.33.4"
-  resolved "https://registry.yarnpkg.com/cytoscape/-/cytoscape-3.33.4.tgz#91bd4f9aa5856e579edfa008fafcadcf036cc667"
-  integrity sha512-HIN5Pmd9MrX9BkV7tDwnOcEJCSFvCpc8X97h3f508J6I5FsqAY65wKOCvgH2CuP42CaahWaz4tuh32SOOIH7ww==
+cytoscape@3.34.0:
+  version "3.34.0"
+  resolved "https://registry.yarnpkg.com/cytoscape/-/cytoscape-3.34.0.tgz#5fbe2eb1cf76b070a8ecd5647c35f65aa097c9c6"
+  integrity sha512-62rNSrioXw93uliKFBwjukeQyeWwH2PqDrTac31r2P6464u3AUvTk0xS4LVvT251g7IgkFunrI48ZEZGjywSOg==
 
 debug@^4.3.1:
   version "4.3.5"
